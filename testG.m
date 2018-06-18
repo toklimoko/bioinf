@@ -9,12 +9,12 @@ brak = 0;
 %  w1 = 'CATWALK';
 %  w2 = 'COWARDS';
 
-% w1 = 'ACGGTTCGCTTAGGG';
-% w2 = 'ACGTTCGAAGCGCTG';
+w1 = 'ACGGTTCGCTTAGGG';
+w2 = 'ACGTTCGAAGCGCTG';
 
 %na tym
-w1 = 'AATC'
-w2 = 'GTC'
+% w1 = 'AATC'
+% w2 = 'GTC'
 
 %w2 = 'GGTAC'
 %w1 = 'AGCTA'
@@ -22,8 +22,8 @@ w2 = 'GTC'
 % w1 = 'GCATTCU';
 % w2 = 'GCTTUTC';
 
- %w1 = 'GGCA';
- %w2 = 'ACGA';
+%  w1 = 'AGCA';
+%  w2 = 'ACGA';
 
 
 %% 
@@ -36,7 +36,7 @@ macierzPunktow
 imagesc(macierzPunktow)
 colorbar
 %}
-[a,b,c,trasy, druki]=funkcjaG( w1, w2, nagroda, kara, brak);
+[E, macierzPunktow, fig, trasy, druki, msg]=funkcjaG( w1, w2, nagroda, kara, brak);
 
 %%
 

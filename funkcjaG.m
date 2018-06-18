@@ -1,4 +1,4 @@
-function [ E, macierzPunktow, fig, trasy, druki ] = funkcjaG( w1, w2, kara, nagroda, brak )
+function [ E, macierzPunktow, fig, trasy, druki, msg ] = funkcjaG( w1, w2, kara, nagroda, brak )
 t=0;
 znacznik = false;
 %ustalenie kary na ujemn¹:
@@ -167,6 +167,8 @@ end
     %druk
     
     druki = cell(1,length(trasy));
+    wektorA=[];
+    wektorB=[];
     
     
     for k = 1:length(trasy) %wybór trasy
@@ -177,12 +179,12 @@ end
     kol = [];
     druk = []; 
 
-
+    wydluzenie = 0;
 
     
     dlugoscTrasy = length(trasy{k});
     
-        for l = 2:dlugoscTrasy+1 %wybór punktu na trasie
+        for l = 2:dlugoscTrasy+1+wydluzenie %wybór punktu na trasie
 
             if l<=length(trasy{k})
 
@@ -196,28 +198,46 @@ end
                     druk1 = '_';
                     druk2 = ' ';
                     druk3 = w2(trasy{k}(l-1,1)-1); 
+                    wydluzenie = wydluzenie+1;
                 end
                 if trasy{k}(l-1,1:2)-[1 0] == trasy{k}(l,1:2) %gdy po poziomie
                     druk1 = w1(trasy{k}(l-1,1)-1);
                     druk2 = ' ';
                     druk3 = '_';
+                    wydluzenie = wydluzenie+1;
                 end
 
   
                     a = trasy{k}(l-1,1)-1;
-                    b = trasy{k}(l-1,2)-1;   
+                    b = trasy{k}(l-1,2)-1;
+                    
                     
                     kol = [druk1;druk2;druk3];
                     druk = [druk kol];
+                    druki{(k)} = druk;
+                    
+                    
             end
                
         end
 
+        wektorA = [wektorA a];
+        wektorB = [wektorB b];
+
     end
 
+    for k = 1:length(trasy)
+        
+        
+        a = wektorA(k);
+        b = wektorB(k);
+        roznica = a-b;
+        if (roznica~=0)
+        
                 druk1 = '';
                 druk2 = '';
                 druk3 = '';
+
 
                 if a~=1
                    for ii=1:(a-1)
@@ -228,10 +248,19 @@ end
                            
                             kol = [druk1;druk2;druk3];
                             druk = [druk kol];
-                            druk = fliplr(druk)                           
-                           druk(1,:) = circshift(druk(1,:), [0 a+1]);
-                           druk
+                            druk = fliplr(druk);                           
+                          druk(1,:) = circshift(druk(1,:), [0 -1]);
                    end
+                   druk=fliplr(druk);
+                   
+                     for jj=1:length(druk)
+                        
+                    
+                        if (druk(1,jj)==druk(3,jj))
+                            druk(2,jj)='|';
+                        end
+
+                    end
                 end
          
                 if b~=1
@@ -240,30 +269,49 @@ end
                            druk2 = [' ' druk2];
                            druk3 = [druk3 w2(end)];
 
-                           kol = [druk1;druk2;druk3]
-                           druk = [druk kol]
-                           druk = fliplr(druk)                           
-                           druk(3,:) = circshift(druk(3,:), [0 b+1]);
+                           kol = [druk1;druk2;druk3];
+                           druk = [druk kol];
+                           druk = fliplr(druk);                         
+                          druk(3,:) = circshift(druk(3,:), [0 -1]);
                    end
-                end
+                   druk=fliplr(druk);
                 
-                for jj=1:length(druk)
-                        
-                    
-                    if (druk(1,jj)==druk(3,jj))
-                        druk(2,jj)='|';
-                    end
-                    
+                
+                        for jj=1:length(druk)
+
+
+                            if (druk(1,jj)==druk(3,jj))
+                                druk(2,jj)='|';
+                            end
+
+                        end
                 end
-        
 %          if znacznik
 %              druk=flipud(druk);
 %          end    
                 
-                
-%         druk=fliplr(druk)
-druk
+        end
+        
+        for jj=1:length(druk)
+
+
+            if (druk(1,jj)==druk(3,jj))
+            druk(2,jj)='|';
+            end
+
+        end
+    
+        
+        druk=fliplr(druk);
         druki{(k)} = druk;
+    end
+    
+
+    
+    for kk=1:length(druki)
+        msg = druki{kk}
+    end
+    
 end
                
       

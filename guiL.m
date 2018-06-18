@@ -163,7 +163,17 @@ brak2 = str2double(brak1.String);
 kara2 = str2double(kara1.String);
 nagroda2 = str2double(nagroda1.String);
 if ~isempty(sekwencja1) && ~isempty(sekwencja2) && ~isempty(brak1) && ~isempty(kara1)&& ~isempty(nagroda1)
-   [E, macierzPunktow, fig, druki] = funkcjaL(w1,w2,kara2,nagroda2,brak2)
+   [E, macierzPunktow, fig, trasy, druki, msg] = funkcjaL(w1,w2,kara2,nagroda2,brak2)
+%cell2mat(druki)
+   for i = 1:length(druki)
+       
+       h = msgbox(druki{i}, 'Wynik');
+       ah = get( h, 'CurrentAxes' );
+       ch = get( ah, 'Children' );
+       set(ch, 'FontName', 'Courier');
+   end
+   
+   msgbox(msg, 'Wynik')
 end
 
 function brak_Callback(hObject, eventdata, handles)

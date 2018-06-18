@@ -34,7 +34,7 @@ macierzPunktow
 imagesc(macierzPunktow)
 colorbar
 %}
-[a,b,c,trasy, druki]=funkcjaL( w1, w2, nagroda, kara, brak);
+[E, macierzPunktow, fig, trasy, druki, msg]=funkcjaL( w1, w2, nagroda, kara, brak);
 
 %%
 
