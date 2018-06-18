@@ -18,8 +18,8 @@ brak = 0;
 % w1 = 'GCATTCU';
 % w2 = 'GCTTUTC';
 
-w1 = ' GTC'
-w2 = 'AATC';
+w2 = 'GTC'
+w1 = 'AATC';
 
 
 %DOPASOWANIE OD WSPOLRZ...

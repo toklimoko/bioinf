@@ -5,6 +5,13 @@ if kara>0
     kara = kara*-1;
 end
 
+    if length(w2)<length(w1)
+    w3 = w2
+    w2 = w1
+    w1 = w3
+    znacznik = true;
+    end
+
 %tworzenie punktów pocz¹tkowych
 zerosRow = zeros(1,length(w2)+1);
 zerosColumn = zeros(1,length(w1)).';
@@ -97,10 +104,10 @@ ylabel('Sekwencja 2');
 %znajdywanie lokalizacji maksimów
 
 kopiaZMaximami = macierzPunktow;
-maskaCzyszczaca = zeros(length(w1),length(w2));
-maskaCzyszczaca = [maskaCzyszczaca ones(length(w1),1)];
-maskaCzyszczaca = [maskaCzyszczaca; ones(1, length(w2)+1)];
-kopiaZMaximami = kopiaZMaximami .* maskaCzyszczaca;
+% maskaCzyszczaca = zeros(length(w1),length(w2));
+% maskaCzyszczaca = [maskaCzyszczaca ones(length(w1),1)];
+% maskaCzyszczaca = [maskaCzyszczaca; ones(1, length(w2)+1)];
+% kopiaZMaximami = kopiaZMaximami .* maskaCzyszczaca;
 
 max_num = max(kopiaZMaximami(:));
 [x,y]=find(kopiaZMaximami==max_num);
@@ -175,12 +182,38 @@ for k = 1:length(trasy)
     
 end
 
-  %druk
+
+    %druk
     
     druki = cell(1,length(trasy));
     wektorA=[];
     wektorB=[];
     
+    
+%     [ a, b, c, d, druki, e ] = funkcjaG( w1, w2, kara, nagroda, brak )
+%     
+%     dane=[];
+%     for h = 1:length(druki)
+%         for i=1:3
+%             for j = 1:length(druki{h})
+%                    
+%                 if (druki{h}(i,j)=='_')
+%                     
+%                    if i ==1 && j==1
+%                        w2 = ['_' w2];
+%                    end
+%                    
+%                    if i==3 && j==1
+%                        w1 = ['_' w1];
+%                    end
+%                    
+%                    
+%                 end
+%             end
+%         end
+%     end
+    
+
     
     for k = 1:length(trasy) %wybór trasy
 
@@ -191,142 +224,80 @@ end
     druk = []; 
 
     wydluzenie = 0;
-
+    licznik = -1;
     
     dlugoscTrasy = length(trasy{k});
     
-        for l = 2:dlugoscTrasy+1+wydluzenie %wybór punktu na trasie
+   for m = 1:(abs(length(w1)-length(w2)))
+    if length(w1)~=length(w2)
+        licznik = licznik + 1;
+    end
+    
+        for l = 2:dlugoscTrasy %wybór punktu na trasie
 
             if l<=length(trasy{k})
 
                 if trasy{k}(l-1,1:2)-1 == trasy{k}(l,1:2) %gdy po skosie
-
+                    
+                    if length(w1)<length(w2)
                     druk1 = w1(trasy{k}(l-1,1)-1);
                     druk2 = ' ';
+                    druk3 = w2(trasy{k}(l-1,1)+licznik);
+                    end
+                    
+                    if length(w2)<length(w1)
+                    druk1 = w1(trasy{k}(l-1,1)+licznik);
+                    druk2 = ' ';
                     druk3 = w2(trasy{k}(l-1,1)-1);
+                    end
+                    
+
                 end
                 if trasy{k}(l-1,1:2)-[0 1] == trasy{k}(l,1:2) %gdy po pionie
                     druk1 = '_';
                     druk2 = ' ';
-                    druk3 = w2(trasy{k}(l-1,1)-1); 
-                    wydluzenie = wydluzenie+1;
+                    druk3 = w2(trasy{k}(l-1,1)+licznik);
+
+ 
                 end
                 if trasy{k}(l-1,1:2)-[1 0] == trasy{k}(l,1:2) %gdy po poziomie
-                    druk1 = w1(trasy{k}(l-1,1)-1);
+                    druk1 = w1(trasy{k}(l-1,1)+licznik);
                     druk2 = ' ';
                     druk3 = '_';
-                    wydluzenie = wydluzenie+1;
+
                 end
 
-  
                     a = trasy{k}(l-1,1)-1;
                     b = trasy{k}(l-1,2)-1;
-                    
-                    
+               
                     kol = [druk1;druk2;druk3];
                     druk = [druk kol];
-                    druki{(k)} = druk;
-                    
-                    
+
             end
-               
+            
+           A = size(druk);
+        for jj=1:A(2)
+            if (druk(1,jj)==druk(3,jj))
+            druk(2,jj)='|';  
+            end
         end
 
+                druki{(k)} = druk
+        end
+        end
         wektorA = [wektorA a];
         wektorB = [wektorB b];
 
-    end
-
-    for k = 1:length(trasy)
-        
-        
-        a = wektorA(k);
-        b = wektorB(k);
-        roznica = a-b;
-        if (roznica~=0)
-        
-                druk1 = '';
-                druk2 = '';
-                druk3 = '';
-
-
-                if a~=1
-                   for ii=1:(a-1)
-
-                           druk1 = [druk1 w1(end)];
-                           druk2 = [' ' druk2];
-                           druk3 = ['_' druk3];
-                           
-                            kol = [druk1;druk2;druk3];
-                            druk = [druk kol];
-                            druk = fliplr(druk);                           
-                          druk(1,:) = circshift(druk(1,:), [0 -1]);
-                   end
-                   druk=fliplr(druk);
-                   
-                     for jj=1:length(druk)
-                        
-                    
-                        if (druk(1,jj)==druk(3,jj))
-                            druk(2,jj)='|';
-                        end
-
-                    end
-                end
-         
-                if b~=1
-                   for ii=1:(b-1)
-                           druk1 = ['_' druk1];
-                           druk2 = [' ' druk2];
-                           druk3 = [druk3 w2(end)];
-
-                           kol = [druk1;druk2;druk3];
-                           druk = [druk kol];
-                           druk = fliplr(druk);                         
-                          druk(3,:) = circshift(druk(3,:), [0 -1]);
-                   end
-                   druk=fliplr(druk);
-                
-                
-                        for jj=1:length(druk)
-
-
-                            if (druk(1,jj)==druk(3,jj))
-                                druk(2,jj)='|';
-                            end
-
-                        end
-                end
-%          if znacznik
-%              druk=flipud(druk);
-%          end    
-                
-        end
-        
-        for jj=1:length(druk)-1
-
-
-            if (druk(1,jj)==druk(3,jj))
-            druk(2,jj)='|';
-            end
-
-        end
-    
-        
-        druk=fliplr(druk);
-        druki{(k)} = druk;
-    end
+   end
     
     
+
+        
     for kk=1:length(druki)
         wydruk = druki{kk}    
-        zmienna = trasy{kk}(3,1:2);
+        zmienna = trasy{kk}(3,1:2)+1;
         msg = ['Zatrzymanie nast¹pi³o w punkcie ',num2str(zmienna)]
     end
     
-
-
-    
 end
-               
-      
+

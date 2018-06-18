@@ -169,7 +169,7 @@ if ~isempty(sekwencja1) && ~isempty(sekwencja2) && ~isempty(brak1) && ~isempty(k
        h = msgbox(druki{i}, 'Wynik');
        ah = get( h, 'CurrentAxes' );
        ch = get( ah, 'Children' );
-       set(ch, 'FontName', 'Courier');
+       set(ch, 'FontName', 'Courier', 'FontSize', 12);
    end
    %msgbox(msg, 'Wynik')
 end

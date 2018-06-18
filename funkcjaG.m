@@ -294,10 +294,11 @@ end
         
         for jj=1:length(druk)
 
-
+       
             if (druk(1,jj)==druk(3,jj))
             druk(2,jj)='|';
             end
+       
 
         end
     
