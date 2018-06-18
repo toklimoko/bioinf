@@ -6,8 +6,8 @@ nagroda = 1;
 brak = 0;
 
 %% wczytywanie sekwencji rêczne
- w1 = 'CATWALK';
- w2 = 'COWARDS';
+%  w1 = 'CATWALK';
+%  w2 = 'COWARDS';
  
 % w1 = 'ACGGTTCGCTTAGGG';
 % w2 = 'ACGTTCGAAGCGCTG';
@@ -18,8 +18,11 @@ brak = 0;
 % w1 = 'GCATTCU';
 % w2 = 'GCTTUTC';
 
-% w1 = ' GTC'
-% w2 = 'AATC';
+w1 = ' GTC'
+w2 = 'AATC';
+
+
+%DOPASOWANIE OD WSPOLRZ...
 
 %% 
 

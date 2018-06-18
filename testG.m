@@ -9,14 +9,22 @@ brak = 0;
 %  w1 = 'CATWALK';
 %  w2 = 'COWARDS';
 
-w1 = 'ACGGTTCGCTTAGGG';
-w2 = 'ACGTTCGAAGCGCTG';
+% w1 = 'ACGGTTCGCTTAGGG';
+% w2 = 'ACGTTCGAAGCGCTG';
+
+%na tym
+w1 = 'AATC'
+w2 = 'GTC'
 
 %w2 = 'GGTAC'
 %w1 = 'AGCTA'
 
 % w1 = 'GCATTCU';
 % w2 = 'GCTTUTC';
+
+ %w1 = 'GGCA';
+ %w2 = 'ACGA';
+
 
 %% 
 
